@@ -1,6 +1,9 @@
 ---
+// @ts-nocheck
+import { Icon } from 'astro-icon/components';
+
 interface Props {
-  variant?: 'primary' | 'secondary' | 'success' | 'fail' | 'glass' | 'ghost' | 'custom';
+  variant?: 'primary' | 'secondary' | 'success' | 'fail' | 'glass' | 'ghost' | 'custom' | 'modrinth';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'pill';
   fullWidth?: boolean;
@@ -25,14 +28,20 @@ const {
   class: className = '',
 } = Astro.props;
 
+const isModrinth = variant === 'modrinth';
+const modrinthDefaultIcon = 'simple-icons:modrinth';
+const appliedIcon = isModrinth ? modrinthDefaultIcon : icon;
+const isIconifyIcon = appliedIcon && appliedIcon.includes(':');
+
 const variantClass = {
-  primary: 'bg-[#db9c3e] hover:bg-[#c58a35] text-black',
+  primary: 'bg-[#db9c3e] hover:bg-[#c58a35] text-white',
   secondary: 'bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-800',
   success: 'bg-green-500 hover:bg-green-600 text-white',
   fail: 'bg-red-500 hover:bg-red-600 text-white',
   glass: 'bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/10',
   ghost: 'bg-transparent hover:bg-zinc-900 text-white',
   custom: '',
+  modrinth: 'bg-[#1bd96a] hover:bg-green-500 text-white'
 };
 
 const sizeClass = {
@@ -75,14 +84,21 @@ const Tag = href ? 'a' : 'button';
   target={href && href.startsWith('http') ? '_blank' : undefined}
   rel={href && href.startsWith('http') ? 'noopener noreferrer' : undefined}
 >
-  {icon && iconPosition === 'left' && (
-    <i class={icon} aria-hidden="true"></i>
+  {appliedIcon && iconPosition === 'left' && (
+    isIconifyIcon ? (
+      <Icon name={appliedIcon} aria-hidden="true" />
+    ) : (
+      <i class={appliedIcon} aria-hidden="true"></i>
+    )
   )}
   
   <slot />
   
-  {icon && iconPosition === 'right' && (
-    <i class={icon} aria-hidden="true"></i>
+  {appliedIcon && iconPosition === 'right' && (
+    isIconifyIcon ? (
+      <Icon name={appliedIcon} aria-hidden="true" />
+    ) : (
+      <i class={appliedIcon} aria-hidden="true"></i>
+    )
   )}
 </Tag>
-
