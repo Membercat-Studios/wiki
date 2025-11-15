@@ -1,16 +1,216 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Faq from '../components/Faq.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+  title="Membercat Studios - Minecraft Content Studio Documentation"
+  description="Complete documentation for Membercat Studios, a Minecraft content studio. Learn about our plugins, mods, modpacks, resource packs, and more."
+>
+  <main class="pt-16">
+    <section class="relative min-h-[92vh] flex items-center justify-center bg-black">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#db9c3e]/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-5 tracking-tight leading-none">
+          Membercat Studios
+        </h1>
+        
+        <div class="h-px w-32 bg-[#db9c3e] mx-auto mb-8"></div>
+        
+        <p class="text-base sm:text-lg text-zinc-500 mb-12 max-w-md mx-auto leading-relaxed">
+          In-Depth documentation for our plugins, mods, modpacks, and resource packs
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button 
+            href="/docs/getting-started" 
+            size="lg" 
+            icon="fa-solid fa-book"
+            iconPosition="left"
+          >
+            Get Started
+          </Button>
+          <Button 
+            href="https://membercat.com" 
+            variant="secondary" 
+            size="lg"
+            icon="fa-solid fa-globe"
+            iconPosition="left"
+          >
+            Website
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-black">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+            What We Create
+          </h2>
+          <p class="text-lg text-zinc-400 max-w-2xl mx-auto">
+            High-quality Minecraft content for Java and Bedrock editions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="group p-8 bg-zinc-950/50 border border-zinc-900 rounded-2xl hover:border-[#db9c3e]/50 transition-all duration-300">
+            <div class="w-12 h-12 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#db9c3e]/20 transition-colors">
+              <i class="fa-solid fa-puzzle-piece text-[#db9c3e] text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Plugins</h3>
+            <p class="text-zinc-400 leading-relaxed">
+              Server-side plugins that enhance gameplay and add new features to your Minecraft server.
+            </p>
+          </div>
+
+          <div class="group p-8 bg-zinc-950/50 border border-zinc-900 rounded-2xl hover:border-[#db9c3e]/50 transition-all duration-300">
+            <div class="w-12 h-12 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#db9c3e]/20 transition-colors">
+              <i class="fa-solid fa-cube text-[#db9c3e] text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Mods</h3>
+            <p class="text-zinc-400 leading-relaxed">
+              Client and server mods that modify game mechanics and add new content to Minecraft.
+            </p>
+          </div>
+
+          <div class="group p-8 bg-zinc-950/50 border border-zinc-900 rounded-2xl hover:border-[#db9c3e]/50 transition-all duration-300">
+            <div class="w-12 h-12 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#db9c3e]/20 transition-colors">
+              <i class="fa-solid fa-box text-[#db9c3e] text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Modpacks</h3>
+            <p class="text-zinc-400 leading-relaxed">
+              Curated collections of mods designed to work together for specific gameplay experiences.
+            </p>
+          </div>
+
+          <div class="group p-8 bg-zinc-950/50 border border-zinc-900 rounded-2xl hover:border-[#db9c3e]/50 transition-all duration-300">
+            <div class="w-12 h-12 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#db9c3e]/20 transition-colors">
+              <i class="fa-solid fa-palette text-[#db9c3e] text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Resource Packs</h3>
+            <p class="text-zinc-400 leading-relaxed">
+              Custom textures, sounds, and visual enhancements to personalize your Minecraft experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-black">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+            Quick Links
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="/docs/getting-started" class="group p-6 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-[#db9c3e]/50 hover:bg-zinc-900/50 transition-all duration-200">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#db9c3e]/20 transition-colors">
+                <i class="fa-solid fa-rocket text-[#db9c3e]"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1 group-hover:text-[#db9c3e] transition-colors">
+                  Getting Started
+                </h3>
+                <p class="text-sm text-zinc-400">
+                  Learn about our content and how to get started
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/docs/guides/deployment" class="group p-6 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-[#db9c3e]/50 hover:bg-zinc-900/50 transition-all duration-200">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#db9c3e]/20 transition-colors">
+                <i class="fa-solid fa-download text-[#db9c3e]"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1 group-hover:text-[#db9c3e] transition-colors">
+                  Installation Guides
+                </h3>
+                <p class="text-sm text-zinc-400">
+                  Step-by-step guides for installing our content
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/docs/guides/configuration" class="group p-6 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-[#db9c3e]/50 hover:bg-zinc-900/50 transition-all duration-200">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#db9c3e]/20 transition-colors">
+                <i class="fa-solid fa-sliders text-[#db9c3e]"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1 group-hover:text-[#db9c3e] transition-colors">
+                  Configuration
+                </h3>
+                <p class="text-sm text-zinc-400">
+                  Configure and customize plugins, mods, and resource packs
+                </p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/docs/advanced/scaling" class="group p-6 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-[#db9c3e]/50 hover:bg-zinc-900/50 transition-all duration-200">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#db9c3e]/10 border border-[#db9c3e]/30 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-[#db9c3e]/20 transition-colors">
+                <i class="fa-solid fa-gear text-[#db9c3e]"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-1 group-hover:text-[#db9c3e] transition-colors">
+                  Advanced Topics
+                </h3>
+                <p class="text-sm text-zinc-400">
+                  Advanced configuration and troubleshooting guides
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-black">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-zinc-400">
+            Common questions about our Minecraft content
+          </p>
+        </div>
+        <Faq />
+      </div>
+    </section>
+
+    <footer class="border-t border-zinc-900 py-12 bg-black">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-zinc-500 text-sm">
+            © {new Date().getFullYear()} Membercat Studios. All rights reserved.
+          </p>
+          <div class="flex items-center gap-6">
+            <a href="/docs/getting-started" class="text-zinc-500 hover:text-white text-sm transition-colors">
+              Documentation
+            </a>
+            <a href="https://membercat.com" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white text-sm transition-colors">
+              Website
+            </a>
+            <a href="https://github.com/membercat" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white text-sm transition-colors">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>

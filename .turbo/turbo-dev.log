@@ -1,0 +1,27 @@
+
+> @netherhost/docs@1.0.0 dev F:\projects\active\Nether Host\netherhost.cc\apps\docs
+> astro dev
+
+15:43:07 [types] Generated 2ms
+15:43:07 [content] Syncing content
+15:43:07 [content] Synced content
+
+ astro  v5.14.6 ready in 1425 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+15:43:07 watching for file changes...
+16:11:25 Configuration file updated. Restarting...
+16:11:26 [vite] Re-optimizing dependencies because vite config has changed
+16:11:26 [content] Syncing content
+16:11:26 [content] Synced content
+16:11:26 [types] Generated 373ms
+16:11:26 [vite] Re-optimizing dependencies because vite config has changed
+16:11:27 [vite] changed tsconfig file detected: F:/projects/active/Nether Host/netherhost.cc/apps/docs/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+16:11:27 Configuration file updated. Restarting...
+16:11:27 [vite] Re-optimizing dependencies because vite config has changed
+16:11:27 [content] Syncing content
+16:11:27 [content] Synced content
+16:11:27 [types] Generated 127ms
+16:11:27 [vite] Re-optimizing dependencies because vite config has changed

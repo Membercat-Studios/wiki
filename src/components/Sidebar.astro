@@ -1,0 +1,242 @@
+---
+import type { NavItem } from '../utils/docs-navigation';
+
+interface Props {
+  navigation: NavItem[];
+  currentPath: string;
+}
+
+const { navigation, currentPath } = Astro.props;
+
+function isActiveOrHasActiveChild(item: NavItem, currentPath: string): boolean {
+  if (item.href === currentPath) {
+    return true;
+  }
+  if (item.items) {
+    return item.items.some((child) => isActiveOrHasActiveChild(child, currentPath));
+  }
+  return false;
+}
+---
+
+<aside class="w-64 bg-black border-r border-zinc-900 h-[calc(100vh-3.5rem)] sticky top-14 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-black">
+  <nav class="p-4 space-y-2">
+    {navigation.map((section) => {
+      const isActive = isActiveOrHasActiveChild(section, currentPath);
+      const shouldExpand = section.expandedByDefault || isActive;
+      const isSection = section.items !== undefined;
+      const hasChildren = section.items && section.items.length > 0;
+      
+      return (
+        <div class="mb-4" data-section>
+          {isSection ? (
+            <button
+              data-toggle
+              data-expanded={shouldExpand ? 'true' : 'false'}
+              class={`w-full flex items-center gap-3 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                isActive
+                  ? 'bg-[#db9c3e]/20 text-[#db9c3e]'
+                  : 'text-zinc-300 hover:bg-zinc-900 hover:text-white'
+              }`}
+            >
+              {section.icon && (
+                <i class={`${section.icon} text-sm w-4 text-center`}></i>
+              )}
+              <a
+                href={section.href}
+                class="flex-1 text-left hover:underline"
+                onclick="event.stopPropagation()"
+              >
+                {section.label}
+              </a>
+              <i
+                class="fa-solid fa-chevron-down text-xs transition-transform duration-300 ease-in-out"
+                data-icon
+              ></i>
+            </button>
+          ) : (
+            <a
+              href={section.href}
+              class={`flex items-center gap-3 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                currentPath === section.href
+                  ? 'bg-[#db9c3e]/20 text-[#db9c3e]'
+                  : 'text-zinc-300 hover:bg-zinc-900 hover:text-white'
+              }`}
+            >
+              {section.icon && (
+                <i class={`${section.icon} text-sm w-4 text-center`}></i>
+              )}
+              <span class="flex-1">{section.label}</span>
+            </a>
+          )}
+          
+          {isSection && (
+            <div
+              data-submenu
+              class="overflow-hidden transition-all duration-300 ease-in-out"
+              style={shouldExpand ? 'max-height: 2000px; opacity: 1;' : 'max-height: 0; opacity: 0;'}
+            >
+              <div class="ml-3 mt-2 space-y-1 border-l border-zinc-800 pl-3">
+                {section.items!.map((item) => {
+                  const isNestedSection = item.items !== undefined;
+                  const hasNestedChildren = item.items && item.items.length > 0;
+                  const isItemActive = isActiveOrHasActiveChild(item, currentPath);
+                  
+                  if (isNestedSection) {
+                    return (
+                      <div class="mb-2" data-nested-section>
+                        <div class="flex items-center gap-2">
+                          <a
+                            href={item.href}
+                            class={`flex-1 py-1.5 text-sm transition-colors ${
+                              currentPath === item.href
+                                ? 'text-[#db9c3e] font-medium'
+                                : 'text-zinc-400 hover:text-white'
+                            }`}
+                          >
+                            {item.label}
+                          </a>
+                          {hasNestedChildren && (
+                            <button
+                              data-toggle
+                              data-expanded={isItemActive ? 'true' : 'false'}
+                              class="p-1 text-zinc-400 hover:text-white transition-colors"
+                              aria-label="Toggle submenu"
+                            >
+                              <i
+                                class="fa-solid fa-chevron-down text-xs transition-transform duration-300 ease-in-out"
+                                data-icon
+                              ></i>
+                            </button>
+                          )}
+                        </div>
+                        {hasNestedChildren && (
+                          <div
+                            data-submenu
+                            class="overflow-hidden transition-all duration-300 ease-in-out ml-3 mt-1"
+                            style={isItemActive ? 'max-height: 2000px; opacity: 1;' : 'max-height: 0; opacity: 0;'}
+                          >
+                            <div class="space-y-1 border-l border-zinc-800 pl-3">
+                              {item.items!.map((subItem) => (
+                                <a
+                                  href={subItem.href}
+                                  class={`block py-1.5 text-sm transition-colors ${
+                                    currentPath === subItem.href
+                                      ? 'text-[#db9c3e] font-medium'
+                                      : 'text-zinc-400 hover:text-white'
+                                  }`}
+                                >
+                                  {subItem.label}
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <a
+                      href={item.href}
+                      class={`block py-1.5 text-sm transition-colors ${
+                        currentPath === item.href
+                          ? 'text-[#db9c3e] font-medium'
+                          : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    })}
+  </nav>
+</aside>
+
+<script>
+  function setupToggleHandlers() {
+    document.querySelectorAll('[data-toggle]').forEach((button) => {
+      const newButton = button.cloneNode(true);
+      button.parentNode?.replaceChild(newButton, button);
+      
+      newButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const buttonElement = e.currentTarget as HTMLElement;
+        const section = buttonElement.closest('[data-section], [data-nested-section]');
+        const submenu = section?.querySelector(':scope > [data-submenu]') as HTMLElement;
+        const icon = buttonElement.querySelector('[data-icon]') as HTMLElement;
+        const isExpanded = buttonElement.getAttribute('data-expanded') === 'true';
+        
+        if (submenu && icon) {
+          if (isExpanded) {
+            submenu.style.maxHeight = '0';
+            submenu.style.opacity = '0';
+            buttonElement.setAttribute('data-expanded', 'false');
+            icon.style.transform = 'rotate(0deg)';
+          } else {
+            submenu.style.maxHeight = '2000px';
+            submenu.style.opacity = '1';
+            buttonElement.setAttribute('data-expanded', 'true');
+            icon.style.transform = 'rotate(180deg)';
+          }
+        }
+      });
+    });
+  }
+  
+  setupToggleHandlers();
+  
+  document.querySelectorAll('[data-toggle]').forEach((button) => {
+    const icon = button.querySelector('[data-icon]') as HTMLElement;
+    const isExpanded = button.getAttribute('data-expanded') === 'true';
+    if (isExpanded && icon) {
+      icon.style.transform = 'rotate(180deg)';
+    }
+  });
+  
+  document.addEventListener('astro:page-load', setupToggleHandlers);
+</script>
+
+<style>
+  [data-icon] {
+    transition: transform 0.3s ease-in-out;
+    display: inline-block;
+  }
+  
+  [data-submenu] {
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #3f3f46;
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: #52525b;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background-color: #000000;
+  }
+  
+  button[data-toggle]:hover [data-icon] {
+    transform: scale(1.1);
+  }
+  
+  button[data-toggle][data-expanded="true"]:hover [data-icon] {
+    transform: rotate(180deg) scale(1.1);
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404 - Page Not Found | Membercat Studios" description="The page you're looking for doesn't exist.">
+  <main class="pt-16 min-h-screen flex items-center justify-center bg-black">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+      <div class="mb-8">
+        <h1 class="text-9xl font-extrabold text-white mb-2">404</h1>
+        <div class="h-1 w-24 bg-[#db9c3e] mx-auto"></div>
+      </div>
+      
+      <h2 class="text-2xl font-bold text-white mb-3">Page Not Found</h2>
+      
+      <p class="text-lg text-zinc-400 mb-10">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center px-6 py-3 bg-[#db9c3e] hover:bg-[#c58a35] text-black rounded-lg font-medium transition-all"
+        >
+          <i class="fa-solid fa-home mr-2"></i>
+          Go Home
+        </a>
+        
+        <a
+          href="/docs/getting-started"
+          class="inline-flex items-center justify-center px-6 py-3 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg font-medium border border-zinc-800 transition-all"
+        >
+          <i class="fa-solid fa-book mr-2"></i>
+          Documentation
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

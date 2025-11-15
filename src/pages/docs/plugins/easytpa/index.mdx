@@ -1,0 +1,54 @@
+---
+layout: ../../../../layouts/MDXLayout.astro
+title: EasyTPA
+order: 1
+---
+
+# EasyTPA
+
+Simple, powerful teleport requests for Minecraft servers.
+
+EasyTPA is a lightweight plugin that adds teleport request functionality to your Minecraft server. Perfect for survival servers where players need to meet up or help each other.
+
+## Features
+
+- **Simple Commands**: Easy-to-use teleport commands
+- **Request System**: Send and accept teleport requests
+- **Cooldowns**: Configurable cooldowns to prevent spam
+- **Multi-Server Support**: Works with Paper, Purpur, and Spigot
+- **Lightweight**: Minimal performance impact
+
+## Installation
+
+1. Download EasyTPA from [Modrinth](https://modrinth.com/plugin/easytpa)
+2. Place the JAR file in your server's `plugins` folder
+3. Restart your server
+4. Configure the plugin in `plugins/EasyTPA/config.yml`
+
+## Commands
+
+- `/tpa <player>` - Request to teleport to a player
+- `/tpahere <player>` - Request a player to teleport to you
+- `/tpaccept` - Accept a teleport request
+- `/tpadeny` - Deny a teleport request
+- `/tpcancel` - Cancel your pending request
+
+## Permissions
+
+- `easytpa.use` - Use teleport commands (default: true)
+- `easytpa.bypass.cooldown` - Bypass cooldown restrictions
+- `easytpa.admin` - Admin commands
+
+## Configuration
+
+Edit `plugins/EasyTPA/config.yml` to customize:
+- Cooldown duration
+- Request timeout
+- Teleport delay
+- And more!
+
+## Requirements
+
+- Paper, Purpur, or Spigot server
+- Java 17 or later
+

@@ -1,0 +1,53 @@
+---
+export interface Props {
+  type?: 'info' | 'warning' | 'danger' | 'success';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const variants = {
+  info: {
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/50',
+    icon: 'fa-circle-info',
+    iconColor: 'text-blue-400',
+  },
+  warning: {
+    bg: 'bg-yellow-500/10',
+    border: 'border-yellow-500/50',
+    icon: 'fa-triangle-exclamation',
+    iconColor: 'text-yellow-400',
+  },
+  danger: {
+    bg: 'bg-red-500/10',
+    border: 'border-red-500/50',
+    icon: 'fa-circle-exclamation',
+    iconColor: 'text-red-400',
+  },
+  success: {
+    bg: 'bg-green-500/10',
+    border: 'border-green-500/50',
+    icon: 'fa-circle-check',
+    iconColor: 'text-green-400',
+  },
+};
+
+const variant = variants[type];
+---
+
+<div class={`my-6 rounded-lg border p-4 ${variant.bg} ${variant.border}`}>
+  <div class="flex items-start gap-3">
+    <i class={`fa-solid ${variant.icon} ${variant.iconColor} text-xl shrink-0 mt-0.5`}></i>
+    <div class="flex-1 min-w-0">
+      {title && (
+        <span class={`text-base font-semibold ${variant.iconColor} tracking-tight block`}>
+          {title}
+        </span>
+      )}
+      <div class="callout-content text-zinc-200/90 text-sm leading-relaxed">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

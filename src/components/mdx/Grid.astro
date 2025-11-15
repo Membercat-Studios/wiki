@@ -1,0 +1,22 @@
+---
+export interface Props {
+  cols?: number;
+  mdCols?: number;
+  lgCols?: number;
+  gap?: number;
+}
+
+const { cols = 1, mdCols, lgCols, gap = 4 } = Astro.props;
+
+const gridClasses = [
+  `grid-cols-${cols}`,
+  mdCols ? `md:grid-cols-${mdCols}` : '',
+  lgCols ? `lg:grid-cols-${lgCols}` : '',
+  `gap-${gap}`,
+].filter(Boolean).join(' ');
+---
+
+<div class={`grid ${gridClasses} my-6`}>
+  <slot />
+</div>
+

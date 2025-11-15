@@ -1,7 +1,8 @@
 {
-  "name": "dreary-debris",
+  "name": "@membercat/wiki",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,6 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.15",
     "astro": "^5.14.6"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^4.3.7",
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/postcss": "^4.1.14",
+    "tailwindcss": "^4.1.15"
   }
 }

@@ -1,0 +1,52 @@
+---
+layout: ../../../../layouts/MDXLayout.astro
+title: EasyRTP
+order: 2
+---
+
+# EasyRTP
+
+Random teleports: Simple. Safe. Fast
+
+EasyRTP provides a safe random teleportation system for your Minecraft server. Players can teleport to random locations with safety checks to prevent dangerous spawns.
+
+## Features
+
+- **Safe Teleportation**: Checks for safe locations before teleporting
+- **Configurable Radius**: Set teleportation boundaries
+- **Cooldowns**: Prevent teleportation spam
+- **Multi-Server Support**: Works with Paper, Purpur, and Spigot
+- **Lightweight**: Minimal server impact
+
+## Installation
+
+1. Download EasyRTP from [Modrinth](https://modrinth.com/plugin/easyrtp)
+2. Place the JAR file in your server's `plugins` folder
+3. Restart your server
+4. Configure the plugin in `plugins/EasyRTP/config.yml`
+
+## Commands
+
+- `/rtp` - Teleport to a random safe location
+- `/rtpreload` - Reload the plugin configuration (admin)
+
+## Permissions
+
+- `easyrtp.use` - Use random teleport command (default: true)
+- `easyrtp.bypass.cooldown` - Bypass cooldown restrictions
+- `easyrtp.admin` - Admin commands
+
+## Configuration
+
+Edit `plugins/EasyRTP/config.yml` to customize:
+- Teleportation radius
+- Cooldown duration
+- Safety checks
+- World restrictions
+- And more!
+
+## Requirements
+
+- Paper, Purpur, or Spigot server
+- Java 17 or later
+

@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title?: string;
+  lang?: string;
+}
+
+const { title, lang } = Astro.props;
+---
+
+<div class="my-6 rounded-lg border border-zinc-800 overflow-hidden bg-zinc-950">
+  {(title || lang) && (
+    <div class="flex items-center justify-between bg-zinc-900 px-4 py-2 border-b border-zinc-800">
+      {title && <span class="text-sm font-medium text-white">{title}</span>}
+      {lang && (
+        <span class="text-xs font-mono text-zinc-400 bg-zinc-800 px-2 py-1 rounded">
+          {lang}
+        </span>
+      )}
+    </div>
+  )}
+  <div class="p-4 overflow-x-auto text-sm">
+    <slot />
+  </div>
+</div>

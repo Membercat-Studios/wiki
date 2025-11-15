@@ -1,0 +1,100 @@
+@import 'tailwindcss';
+
+@layer base {
+  html {
+    @apply bg-black;
+  }
+
+  body {
+    @apply bg-black text-gray-100;
+  }
+
+  * {
+    @apply border-zinc-800;
+  }
+}
+
+@layer components {
+  .prose,
+  .prose-invert {
+    @apply max-w-none text-zinc-300;
+  }
+
+  .prose h1 {
+    @apply mt-8 mb-4 text-4xl font-bold text-white;
+  }
+
+  .prose h2 {
+    @apply mt-6 mb-3 border-b border-zinc-800 pb-2 text-3xl font-bold text-white;
+  }
+
+  .prose h3 {
+    @apply mt-4 mb-2 text-2xl font-semibold text-white;
+  }
+
+  .prose h4 {
+    @apply mt-3 mb-2 text-xl font-semibold text-white;
+  }
+
+  .prose p {
+    @apply mb-4 leading-7;
+  }
+
+  .prose a {
+    @apply text-[#db9c3e] underline hover:text-[#c58a35];
+  }
+
+  .prose ul {
+    @apply mb-4 ml-6 list-disc;
+  }
+
+  .prose ol {
+    @apply mb-4 ml-6 list-decimal;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose ul ul,
+  .prose ol ul {
+    @apply list-disc;
+  }
+
+  .prose ul ol,
+  .prose ol ol {
+    @apply list-decimal;
+  }
+
+  .prose code {
+    @apply rounded bg-zinc-900 px-1.5 py-0.5 text-sm text-[#db9c3e];
+  }
+
+  .prose pre {
+    @apply mb-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 p-4;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .prose blockquote {
+    @apply my-4 border-l-4 border-[#db9c3e] pl-4 text-zinc-400 italic;
+  }
+
+  .prose table {
+    @apply mb-4 w-full;
+  }
+
+  .prose th {
+    @apply bg-zinc-900 p-3 text-left font-semibold text-white;
+  }
+
+  .prose td {
+    @apply border-t border-zinc-800 p-3;
+  }
+
+  .prose img {
+    @apply my-4 rounded-lg;
+  }
+}

@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { generateNavigation } from '../utils/docs-navigation';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = `${title} | Membercat Studios Documentation`;
+
+const navigation = generateNavigation();
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<BaseLayout title={fullTitle} description={description}>
+  <div class="pt-14 min-h-screen bg-black">
+    <div class="flex">
+      <Sidebar navigation={navigation} currentPath={currentPath} />
+      <main class="flex-1 min-w-0 bg-black">
+        <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div class="prose prose-invert max-w-none">
+            <slot />
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+</BaseLayout>

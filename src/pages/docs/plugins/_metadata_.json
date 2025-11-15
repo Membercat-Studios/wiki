@@ -1,0 +1,7 @@
+{
+  "name": "Plugins",
+  "icon": "fa-solid fa-puzzle-piece",
+  "order": 4,
+  "expandedByDefault": false
+}
+

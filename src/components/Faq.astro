@@ -1,0 +1,59 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqData: FaqItem[] = [
+  {
+    question: 'What is Membercat Studios?',
+    answer: 'Membercat Studios is a Minecraft content studio dedicated to creating high-quality plugins, mods, modpacks, resource packs, and other Minecraft content. We focus on creating well-documented, polished content that enhances the Minecraft experience for players and server owners.'
+  },
+  {
+    question: 'What content do you create?',
+    answer: 'We create a wide variety of Minecraft content including server plugins, client and server mods, curated modpacks, custom resource packs, and developer tools. Our content spans both Java and Bedrock editions, with a focus on quality, performance, and ease of use.'
+  },
+  {
+    question: 'How do I get started?',
+    answer: 'Getting started is easy! Browse our documentation to find installation guides for our plugins, mods, and modpacks. Each piece of content includes detailed setup instructions, configuration options, and usage examples to help you get started quickly.'
+  },
+  {
+    question: 'Do you provide support?',
+    answer: 'Yes, we provide comprehensive documentation and support for all our content. If you have questions, encounter issues, or need help with installation or configuration, you can reach out through our GitHub repositories or community channels.'
+  },
+  {
+    question: 'Can I contribute to your projects?',
+    answer: 'Absolutely! We welcome contributions from the community. Check out our GitHub repositories to see how you can get involved, whether it\'s reporting bugs, suggesting features, submitting pull requests, or creating resource pack variants.'
+  },
+];
+---
+
+<div class="space-y-4">
+  {faqData.map((item, index) => (
+    <details class="group bg-zinc-950 p-6 rounded-lg border border-zinc-900 cursor-pointer" open={index === 0}>
+      <summary class="flex items-center justify-between text-lg font-medium text-white list-none">
+        {item.question}
+        <div class="flex-shrink-0 ml-4 w-6 h-6 flex items-center justify-center">
+          <i class="fa-solid fa-chevron-down text-zinc-500 transition-transform duration-300 group-open:rotate-180"></i>
+        </div>
+      </summary>
+      <div class="text-zinc-400 mt-4 text-base leading-relaxed">
+        {item.answer}
+      </div>
+    </details>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('details').forEach((detail) => {
+    detail.addEventListener('toggle', (event) => {
+      if (detail.open) {
+        document.querySelectorAll('details').forEach((otherDetail) => {
+          if (otherDetail !== detail) {
+            otherDetail.removeAttribute('open');
+          }
+        });
+      }
+    });
+  });
+</script>

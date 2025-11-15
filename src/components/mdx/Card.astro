@@ -1,0 +1,29 @@
+---
+export interface Props {
+  title?: string;
+  icon?: string;
+  href?: string;
+}
+
+const { title, icon, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag href={href} class:list={[
+  'group relative block p-6 bg-zinc-950 border border-zinc-900 rounded-xl transition-all',
+  href && 'hover:border-red-500/80 hover:bg-zinc-900'
+]}>
+  {icon && (
+    <div class="mb-4 w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+      <i class={`fa-solid ${icon} text-red-500 text-lg transition-colors group-hover:text-red-400`}></i>
+    </div>
+  )}
+  <div class="flex flex-col">
+    {title && (
+      <h3 class="text-white font-semibold mb-2">{title}</h3>
+    )}
+    <div class="text-zinc-400 text-sm leading-relaxed">
+      <slot />
+    </div>
+  </div>
+</Tag>

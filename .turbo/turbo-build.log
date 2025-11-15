@@ -1,0 +1,32 @@
+
+> @netherhost/docs@1.0.0 build F:\projects\active\Nether Host\netherhost.cc\apps\docs
+> astro build
+
+16:20:53 [vite] Re-optimizing dependencies because vite config has changed
+16:20:53 [content] Syncing content
+16:20:53 [content] Synced content
+16:20:53 [types] Generated 304ms
+16:20:53 [build] output: "static"
+16:20:53 [build] mode: "static"
+16:20:53 [build] directory: F:\projects\active\Nether Host\netherhost.cc\apps\docs\dist\
+16:20:53 [build] Collecting build info...
+16:20:53 [build] ✓ Completed in 336ms.
+16:20:53 [build] Building static entrypoints...
+16:20:54 [vite] [32m✓ built in 1.01s[39m
+16:20:54 [build] ✓ Completed in 1.05s.
+
+ building client (vite) 
+16:20:54 [vite] transforming...
+16:20:54 [vite] [32m✓[39m 2 modules transformed.
+16:20:54 [vite] rendering chunks...
+16:20:54 [vite] [32m✓ built in 15ms[39m
+
+ generating static routes 
+16:20:54 ▶ src/pages/404.astro
+16:20:54   └─ /404.html (+6ms) 
+16:20:54 ▶ src/pages/index.astro
+16:20:54   └─ /index.html (+4ms) 
+16:20:54 ✓ Completed in 24ms.
+
+16:20:54 [build] 2 page(s) built in 1.46s
+16:20:54 [build] Complete!

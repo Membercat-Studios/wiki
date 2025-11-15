@@ -1,0 +1,7 @@
+{
+  "name": "FAQ",
+  "icon": "fa-solid fa-circle-question",
+  "order": 2,
+  "expandedByDefault": false
+}
+

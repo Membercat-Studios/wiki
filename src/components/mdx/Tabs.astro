@@ -1,0 +1,67 @@
+---
+export interface Props {
+  labels: string[];
+}
+
+const { labels } = Astro.props;
+const id = `tabs-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="my-6 bg-zinc-950/50 rounded-lg border border-zinc-800" data-tabs={id}>
+  <div class="flex gap-2 border-b border-zinc-800 p-2">
+    {labels.map((label, index) => (
+      <button
+        data-tab-button={index}
+        class={`px-4 py-2 text-sm font-medium rounded-md transition-colors relative z-10 ${
+          index === 0
+            ? 'text-red-500 bg-zinc-900'
+            : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+        }`}
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+  <div data-tab-content class="p-4">
+    <slot />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('[data-tabs]').forEach((tabsContainer) => {
+      const buttons = tabsContainer.querySelectorAll('[data-tab-button]');
+      const contentContainer = tabsContainer.querySelector('[data-tab-content]');
+      const panels = contentContainer?.children;
+
+      if (!panels) return;
+
+      Array.from(panels).forEach((panel, index) => {
+        (panel as HTMLElement).style.display = index === 0 ? 'block' : 'none';
+      });
+
+      buttons.forEach((button, index) => {
+        if (index === 0) {
+          button.classList.add('text-red-500', 'bg-zinc-900');
+          button.classList.remove('text-zinc-400', 'hover:text-white', 'hover:bg-zinc-800');
+        } else {
+          button.classList.remove('text-red-500', 'bg-zinc-900');
+          button.classList.add('text-zinc-400', 'hover:text-white', 'hover:bg-zinc-800');
+        }
+
+        button.addEventListener('click', () => {
+          buttons.forEach((btn) => {
+            btn.classList.remove('text-red-500', 'bg-zinc-900');
+            btn.classList.add('text-zinc-400', 'hover:text-white', 'hover:bg-zinc-800');
+          });
+          button.classList.remove('text-zinc-400', 'hover:text-white', 'hover:bg-zinc-800');
+          button.classList.add('text-red-500', 'bg-zinc-900');
+
+          Array.from(panels).forEach((panel, panelIndex) => {
+            (panel as HTMLElement).style.display = panelIndex === index ? 'block' : 'none';
+          });
+        });
+      });
+    });
+  });
+</script>
