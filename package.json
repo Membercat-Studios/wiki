@@ -13,7 +13,8 @@
     "@iconify-json/simple-icons": "^1.1.0",
     "@tailwindcss/vite": "^4.1.15",
     "astro": "^5.14.6",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "remark-github-blockquote-alert": "^2.0.0"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.7",
