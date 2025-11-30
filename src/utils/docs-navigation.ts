@@ -1,4 +1,5 @@
 import fs from "fs";
+import matter from "gray-matter";
 import path from "path";
 
 export interface NavItem {
@@ -15,6 +16,57 @@ interface CategoryMetadata {
   icon?: string;
   order?: number;
   expandedByDefault?: boolean;
+}
+
+type MDXType = 'modpack' | 'mod' | 'plugin' | 'resource-pack' | 'data-pack'
+
+const mdxTypeTags: { [type in MDXType]: MDXTag } = {
+  'modpack': {
+    name: 'Modpack',
+    icon: 'fa-box-open-full',
+    color: '#b43edb'
+  },
+  'mod': {
+    name: 'Mod',
+    icon: 'fa-cubes',
+    color: '#DB3E3E'
+  },
+  'plugin': {
+    name: 'Plugin',
+    icon: 'fa-puzzle-piece',
+    color: '#3EB5DB'
+  },
+  'resource-pack': {
+    name: 'Resource Pack',
+    icon: 'fa-paint-roller',
+    color: '#CA5614'
+  },
+  'data-pack': {
+    name: 'Data Pack',
+    icon: 'fa-brackets-curly',
+    color: '#87DB3E'
+  }
+};
+export interface MDXMetadata {
+  title?: string;
+  summary?: string
+  type?: MDXType;
+  icon?: string;
+  order?: number;
+  tags?: MDXTag[];
+}
+
+export interface MDXTag {
+  name?: string;
+  icon?: string;
+  color: string;
+}
+
+export function setTypeTag(metadata: MDXMetadata): MDXMetadata {
+  if (!metadata.type) return metadata;
+  const typeTag = mdxTypeTags[metadata.type];
+  metadata.tags = [typeTag, ...metadata.tags || []];
+  return metadata;
 }
 
 function scanDirectory(
@@ -156,13 +208,14 @@ function scanProjectDirectory(
         continue;
       }
 
+      let metadata: MDXMetadata = readMetadata(`${entry.parentPath}/${entry.name}`);
       const fileNameWithoutExt = entry.name.replace(/\.(mdx?|md)$/, "");
-      const pageLabel = formatLabel(fileNameWithoutExt);
       const pageHref = `${projectHref}/${fileNameWithoutExt}`;
 
       projectPages.push({
-        label: pageLabel,
+        label: metadata.title || formatLabel(fileNameWithoutExt),
         href: pageHref,
+        ...metadata
       });
     } else if (entry.isDirectory()) {
       const subDir = path.join(dir, entry.name);
@@ -188,6 +241,17 @@ function scanProjectDirectory(
     icon: metadata.icon,
     expandedByDefault: metadata.expandedByDefault ?? false,
   };
+}
+
+function readMetadata(path: fs.PathOrFileDescriptor): MDXMetadata {
+  try {
+    const contents = fs.readFileSync(path, "utf-8")
+    const metadata = matter(contents).data as MDXMetadata;
+    return setTypeTag(metadata);
+  } catch (e) {
+    console.warn(`Failed to parse metadata for file ${path}:`, e);
+    return {};
+  }
 }
 
 export function generateNavigation(): NavItem[] {
