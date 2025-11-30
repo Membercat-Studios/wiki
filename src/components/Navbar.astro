@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Documentation', href: '/docs/getting-started' },
+  { label: 'Documentation', href: '/docs/getting-started', root: '/docs/' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
 
       <div class="hidden md:flex items-center gap-1">
         {navItems.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.root || item.href));
           return (
             <a
               href={item.href}
