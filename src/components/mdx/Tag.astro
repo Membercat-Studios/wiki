@@ -1,0 +1,18 @@
+---
+import type { MDXTag } from "../../utils/docs-navigation";
+
+export interface Props {
+    tag: MDXTag;
+    addClass?: string;
+}
+
+const { tag, addClass } = Astro.props;
+---
+
+<div
+    class={`text-base p-2 font-bold text-white rounded-md mr-4 mb-2 inline ${addClass}`}
+    style={`background: ${tag.color || "gray"};`}
+>
+    <span class={`fa-solid ${tag.icon || "fa-question"}`}></span>
+    {tag.name || "Unknown Tag"}
+</div>
