@@ -1,44 +1,64 @@
 ---
 // @ts-nocheck
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Documentation', href: '/docs/getting-started' },
+  { label: "Home", href: "/" },
+  { label: "Documentation", href: "/docs/getting-started", root: "/docs/" },
 ];
 
 const currentPath = Astro.url.pathname;
+const active = (item) =>
+  currentPath === item.href ||
+  (item.href !== "/" && currentPath.startsWith(item.root || item.href));
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-zinc-900/50">
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-zinc-900/50"
+>
   <div class="max-w-full mx-auto px-2 sm:px-4 lg:px-6">
-    <div class="flex items-center justify-between h-14">  
+    <div class="flex items-center justify-between h-14">
       <a href="/" class="flex items-center gap-2.5 group">
-        <img src="/membercat.png" alt="Membercat Studios Logo" class="w-7 h-7 rounded" />
-        <span class="text-lg font-semibold text-white group-hover:text-[#db9c3e] transition-colors">Membercat Studios</span>
+        <img
+          src="/membercat.png"
+          alt="Membercat Studios Logo"
+          class="w-7 h-7 rounded"
+        />
+        <span
+          class="text-lg font-semibold text-white group-hover:text-[#db9c3e] transition-colors"
+          >Membercat Studios</span
+        >
       </a>
 
       <div class="hidden md:flex items-center gap-1">
-        {navItems.map((item) => {
-          const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-          return (
+        {
+          navItems.map((item) => (
             <a
               href={item.href}
               class={`px-3 py-1.5 rounded-md text-sm transition-colors ${
-                isActive
-                  ? 'text-white bg-[#db9c3e]/20'
-                  : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50'
+                active(item)
+                  ? "text-white bg-[#db9c3e]/20"
+                  : "text-zinc-400 hover:text-white hover:bg-zinc-900/50"
               }`}
             >
               {item.label}
             </a>
-          );
-        })}
+          ))
+        }
       </div>
 
-      <div class="hidden md:flex items-center gap-3">
+      <div class="hidden md:flex items-center gap-2">
         <a
-          href="https://github.com/membercat"
+          href="https://dc.kasai.gg"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-2 text-zinc-400 hover:text-indigo-500 transition-colors"
+          aria-label="Discord"
+        >
+          <i class="fab fa-discord text-xl"></i>
+        </a>
+        <a
+          href="https://github.com/Membercat-Studios"
           target="_blank"
           rel="noopener noreferrer"
           class="p-2 text-zinc-400 hover:text-white transition-colors"
@@ -50,9 +70,13 @@ const currentPath = Astro.url.pathname;
           href="https://membercat.com"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-2 px-3 py-1.5 bg-[#1bd96a] hover:bg-green-500 text-white rounded-md text-sm font-medium transition-colors"
+          class="flex items-center ml-2 gap-2 px-3 py-1.5 bg-[#1bd96a] hover:bg-green-500 text-white rounded-md text-sm font-medium transition-colors"
         >
-          <Icon name="simple-icons:modrinth" aria-hidden="true" class="w-4 h-4" />
+          <Icon
+            name="simple-icons:modrinth"
+            aria-hidden="true"
+            class="w-4 h-4"
+          />
           <span>Modrinth</span>
         </a>
       </div>
@@ -66,42 +90,44 @@ const currentPath = Astro.url.pathname;
       </button>
     </div>
   </div>
-  
-  <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-900/50 bg-black/95 backdrop-blur-md">
+
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-zinc-900/50 bg-black/95 backdrop-blur-md"
+  >
     <div class="px-4 py-3 space-y-1">
-      {navItems.map((item) => {
-        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-        return (
+      {
+        navItems.map((item) => (
           <a
             href={item.href}
             class={`block px-3 py-2 rounded-md text-sm transition-colors ${
-              isActive
-                ? 'text-white bg-[#db9c3e]/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900/50'
+              active(item)
+                ? "text-white bg-[#db9c3e]/20"
+                : "text-zinc-400 hover:text-white hover:bg-zinc-900/50"
             }`}
           >
             {item.label}
           </a>
-        );
-      })}
+        ))
+      }
       <a
         href="https://membercat.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="block px-3 py-2 mt-2 bg-[#db9c3e] hover:bg-[#c58a35] text-black rounded-md text-sm font-medium text-center transition-colors"
+        class="flex items-center gap-2 px-3 py-2 bg-[#1bd96a] hover:bg-green-500 text-white rounded-md text-sm font-medium transition-colors"
       >
-        Website
+        <Icon name="simple-icons:modrinth" aria-hidden="true" class="w-4 h-4" />
+        <span>Modrinth</span>
       </a>
     </div>
   </div>
 </nav>
 
 <script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
+  const button = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
 
-  button?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
+  button?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
   });
 </script>
-

@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'remark-github-blockquote-alert/alert.css';
 
 @layer base {
   html {

@@ -1,19 +1,26 @@
 ---
-import DocsLayout from './DocsLayout.astro';
+import DocsLayout from "./DocsLayout.astro";
+import { setTypeTag, type MDXMetadata } from "../utils/docs-navigation.ts";
+import Tag from "../components/mdx/Tag.astro";
 
-interface Props {
-  frontmatter?: {
-    title?: string;
-    description?: string;
-  };
-}
-
-const { frontmatter } = Astro.props;
-const title = frontmatter?.title || 'Documentation';
-const description = frontmatter?.description;
+const metadata = Astro.props.frontmatter as MDXMetadata;
+setTypeTag(metadata);
+const title = metadata?.title || "Documentation";
+const description = metadata?.summary;
+const renderOneTag = (metadata.tags?.length || 0) == 1;
 ---
 
 <DocsLayout title={title} description={description}>
+  <h1 class="text-heading font-extrabold">
+    {title}
+    {metadata.tags && renderOneTag ? <Tag tag={metadata.tags[0]} addClass="align-middle"/> : ""}
+  </h1>
+  <h4 class="text-heading font-extralight mb-4" style="color: #db9c3e;">
+    {description}
+  </h4>
+  <div class="flex">
+    {!renderOneTag ? metadata.tags?.map((tag) => <Tag tag={tag} />) : ""}
+  </div>
+  <hr class="pb-6" />
   <slot />
 </DocsLayout>
-
