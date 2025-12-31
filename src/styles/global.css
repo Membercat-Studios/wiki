@@ -1,5 +1,6 @@
-@import 'tailwindcss';
-@import 'remark-github-blockquote-alert/alert.css';
+@import url(https://fonts.bunny.net/css?family=instrument-sans:400,500,600);
+@import "tailwindcss";
+@import "remark-github-blockquote-alert/alert.css";
 
 @layer base {
   html {
@@ -8,6 +9,7 @@
 
   body {
     @apply bg-black text-gray-100;
+    font-family: "Instrument Sans", sans-serif;
   }
 
   * {
